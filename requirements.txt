@@ -1,0 +1,15 @@
+duckdb
+ipython
+joblib
+jupyterlab
+lightgbm
+matplotlib
+numpy
+pandas
+psycopg2-binary
+pyarrow
+scikit-learn==1.8.0
+scipy
+seaborn
+torch
+tqdm

@@ -1,0 +1,10 @@
+cohort,model,auroc,auprc,recall,f1,precision
+MIMIC-IV internal test,Transformer,0.92975,0.842711,0.771071,0.768464,0.765874
+MIMIC-IV internal test,LightGBM,0.967538,0.917745,0.864643,0.850369,0.836558
+MIMIC-IV internal test,FusionMLP,0.9347,0.8576,0.7939,0.7771,0.761
+NWICU external validation,Transformer,0.903497,0.502186,0.614627,0.542184,0.485017
+NWICU external validation,LightGBM,0.941556,0.618378,0.672293,0.590123,0.525853
+NWICU external validation,FusionMLP,0.905472,0.487736,0.639944,0.544584,0.473958
+eICU external validation,Transformer,0.831886,0.360185,0.582798,0.335303,0.235355
+eICU external validation,LightGBM,0.928594,0.621163,0.849807,0.444146,0.300636
+eICU external validation,FusionMLP,0.834742,0.385051,0.622593,0.342152,0.235895

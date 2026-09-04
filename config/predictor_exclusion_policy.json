@@ -1,0 +1,12 @@
+{
+  "version": "predictor-exclusion-policy-v2",
+  "policy": "fail_closed",
+  "excluded_from_predictors": [
+    "active vasoactive or inotropic support",
+    "vasoactive drug names",
+    "vasoactive dose or rate",
+    "vasoactive start, stop, titration, and derived timing variables",
+    "endpoint and future-target columns"
+  ],
+  "note": "Vasoactive support may contribute to endpoint construction but is not a model input."
+}

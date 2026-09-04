@@ -1,0 +1,11 @@
+{
+  "version": "circulatory-failure-primary-v2",
+  "grid_minutes": 5,
+  "formula": "arterial_lactate >= 2 AND (MAP <= 65 OR vasoactive_or_inotropic_support)",
+  "persistence": "at least 2 of 3 consecutive timesteps",
+  "onset": "first persistent occurrence",
+  "lactate_carry_forward_hours": 4,
+  "prediction_target": "first onset in (t, t+8h]",
+  "latest_input_time": "t-5min",
+  "post_onset_rows_eligible": false
+}
