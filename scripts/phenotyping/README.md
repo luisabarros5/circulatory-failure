@@ -4,6 +4,12 @@ This directory contains the exploratory clustering pipeline for ICU stays meetin
 
 The phenotyping analysis is still under methodological review and should not be interpreted as a finalized phenotype solution.
 
+## Current approach — first-onset clinical snapshot
+
+The current preferred exploratory approach uses one clinical snapshot per positive ICU stay at the first circulatory-failure onset. It avoids temporal padding and does not use MiniRocket. A curated 20-variable panel is median-imputed, selectively log-transformed, winsorized, standardized, optionally reduced with PCA, and clustered with K-means.
+
+The complete pipeline and robustness analyses are under `onset_snapshot/`. The principal global solution is PCA80 + k=2, followed by exploratory subclustering of the multiorgan-dysfunction macrophenotype.
+
 ## Approach A — fixed 8-h pre-onset window
 
 For each positive ICU stay:
@@ -30,6 +36,7 @@ The resulting representation is processed with MiniRocket, PCA (50 components), 
 
 - `core/`: MiniRocket and clustering utilities
 - `cohort/`: positive-cohort construction and audits
+- `onset_snapshot/`: current first-onset snapshot pipeline, clinical characterization, subclustering, and stability analyses
 - `approach_a_fixed_8h/`: fixed-window approach
 - `approach_b_normalized_preonset/`: normalized-time approach
 - `validation/`: sensitivity and robustness analyses

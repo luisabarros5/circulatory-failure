@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import re
 import sys
@@ -7,6 +8,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES = {".parquet", ".h5", ".hdf5", ".npy", ".npz", ".pt", ".pth", ".ckpt", ".joblib", ".pkl"}
+FORBIDDEN_IDENTIFIER_COLUMNS = {
+    "subject_id",
+    "stay_id",
+    "hadm_id",
+    "patient_id",
+    "person_id",
+    "mrn",
+}
 FORBIDDEN_PATTERNS = {
     "personal path": re.compile(r"/(?:scratch2?|home)/(?:luisabarros|leticia\.ribeiro)(?:/|$)", re.I),
     "database password value": re.compile(r'(?:password|passwd)\s*[=:]\s*["\'][^"\']+', re.I),
@@ -29,6 +38,19 @@ for path in ROOT.rglob("*"):
         errors.append(f"forbidden file type: {relative}")
     if path.stat().st_size > 5 * 1024 * 1024:
         errors.append(f"file larger than 5 MiB: {relative}")
+    if any(token in path.name.lower() for token in FORBIDDEN_IDENTIFIER_COLUMNS):
+        errors.append(f"identifier-bearing filename: {relative}")
+    if path.suffix.lower() in {".csv", ".tsv"}:
+        delimiter = "\t" if path.suffix.lower() == ".tsv" else ","
+        with path.open("r", encoding="utf-8", errors="ignore", newline="") as handle:
+            header = next(csv.reader(handle, delimiter=delimiter), [])
+        identifier_columns = FORBIDDEN_IDENTIFIER_COLUMNS.intersection(
+            column.strip().lower() for column in header
+        )
+        if identifier_columns:
+            errors.append(
+                f"identifier column(s) {sorted(identifier_columns)}: {relative}"
+            )
     if path.suffix.lower() in {".py", ".md", ".json", ".yml", ".yaml", ".txt", ".example", ".ipynb"} or path.name in {".gitignore"}:
         text = path.read_text(encoding="utf-8", errors="ignore")
         if relative != Path("scripts/check_public_release.py"):

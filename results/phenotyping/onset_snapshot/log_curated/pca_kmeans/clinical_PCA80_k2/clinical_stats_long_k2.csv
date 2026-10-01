@@ -1,0 +1,43 @@
+cluster,feature,variable,unit,median,q1,q3,overall_observed_at_onset_pct,warning
+0,heart_rate,Heart rate,bpm,93.0,78.0,108.0,18.362030624563182,
+1,heart_rate,Heart rate,bpm,84.0,74.0,98.0,18.362030624563182,
+0,sbp,Systolic blood pressure,mmHg,97.0,87.0,109.0,18.13965309104772,
+1,sbp,Systolic blood pressure,mmHg,103.0,92.0,117.0,18.13965309104772,
+0,dbp,Diastolic blood pressure,mmHg,51.0,45.0,58.0,18.13329944723299,
+1,dbp,Diastolic blood pressure,mmHg,54.0,48.0,64.0,18.13329944723299,
+0,mbp,Mean blood pressure,mmHg,63.0,57.0,70.0,18.088823940529892,
+1,mbp,Mean blood pressure,mmHg,68.0,61.0,80.0,18.088823940529892,
+0,resp_rate,Respiratory rate,insp/min,21.0,17.0,25.0,18.80678569159413,
+1,resp_rate,Respiratory rate,insp/min,18.0,15.0,22.0,18.80678569159413,
+0,temperature,Temperature,°C,36.79999923706055,36.439998626708984,37.060001373291016,6.06137619925027,
+1,temperature,Temperature,°C,36.83000183105469,36.38999938964844,37.0,6.06137619925027,
+0,spo2,SpO2,%,97.0,95.0,99.0,16.303450028591396,
+1,spo2,SpO2,%,99.0,97.0,100.0,16.303450028591396,
+0,lab_50813,Lactate,mmol/L,2.5999999046325684,1.7999999523162842,4.300000190734863,2.096702458860156,very sparse observed-at-onset coverage (2.10%); interpret cautiously
+1,lab_50813,Lactate,mmol/L,2.299999952316284,1.2000000476837158,3.0999999046325684,2.096702458860156,very sparse observed-at-onset coverage (2.10%); interpret cautiously
+0,glucose,Glucose,mg/dL,135.0,95.0,191.0,6.245631869877375,
+1,glucose,Glucose,mg/dL,134.0,82.0,172.0,6.245631869877375,
+0,lab_50983,Sodium,mmol/L,137.0,133.0,141.0,3.60886968676536,very sparse observed-at-onset coverage (3.61%); interpret cautiously
+1,lab_50983,Sodium,mmol/L,140.0,138.0,140.0,3.60886968676536,very sparse observed-at-onset coverage (3.61%); interpret cautiously
+0,lab_50971,Potassium,mmol/L,4.5,3.9000000953674316,5.099999904632568,3.621576974394816,very sparse observed-at-onset coverage (3.62%); interpret cautiously
+1,lab_50971,Potassium,mmol/L,4.400000095367432,3.9000000953674316,4.5,3.621576974394816,very sparse observed-at-onset coverage (3.62%); interpret cautiously
+0,lab_50912,Creatinine,mg/dL,2.0999999046325684,1.2999999523162842,3.299999952316284,5.082915051782197,
+1,lab_50912,Creatinine,mg/dL,1.0,0.800000011920929,1.100000023841858,5.082915051782197,
+0,lab_51006,BUN,mg/dL,43.0,28.0,65.0,5.082915051782197,
+1,lab_51006,BUN,mg/dL,15.0,15.0,23.0,5.082915051782197,
+0,lab_50878,AST,U/L,65.0,40.0,189.0,1.1309485990215389,very sparse observed-at-onset coverage (1.13%); interpret cautiously
+1,lab_50878,AST,U/L,40.0,29.0,40.0,1.1309485990215389,very sparse observed-at-onset coverage (1.13%); interpret cautiously
+0,lab_50861,ALT,U/L,37.0,25.0,116.0,1.1309485990215389,very sparse observed-at-onset coverage (1.13%); interpret cautiously
+1,lab_50861,ALT,U/L,30.0,23.0,30.0,1.1309485990215389,very sparse observed-at-onset coverage (1.13%); interpret cautiously
+0,lab_50885,Total bilirubin,mg/dL,1.2000000476837158,0.699999988079071,3.5,1.124594955206811,very sparse observed-at-onset coverage (1.12%); interpret cautiously
+1,lab_50885,Total bilirubin,mg/dL,1.0,0.6000000238418579,1.0,1.124594955206811,very sparse observed-at-onset coverage (1.12%); interpret cautiously
+0,lab_50862,Albumin,g/dL,3.200000047683716,2.5999999046325684,4.300000190734863,0.5908888747696804,very sparse observed-at-onset coverage (0.59%); interpret cautiously
+1,lab_50862,Albumin,g/dL,4.300000190734863,3.9000000953674316,4.300000190734863,0.5908888747696804,very sparse observed-at-onset coverage (0.59%); interpret cautiously
+0,lab_51222,Hemoglobin,g/dL,9.399999618530273,8.100000381469727,11.0,5.146451489929475,
+1,lab_51222,Hemoglobin,g/dL,11.100000381469727,9.399999618530273,14.0,5.146451489929475,
+0,lab_51265,Platelets,10^3/µL,148.0,89.0,228.0,5.1782197090031135,
+1,lab_51265,Platelets,10^3/µL,200.0,139.0,210.0,5.1782197090031135,
+0,lab_51274,Prothrombin time,s,18.299999237060547,14.699999809265137,24.899999618530273,4.809708367748904,very sparse observed-at-onset coverage (4.81%); interpret cautiously
+1,lab_51274,Prothrombin time,s,13.199999809265137,12.0,15.100000381469727,4.809708367748904,very sparse observed-at-onset coverage (4.81%); interpret cautiously
+0,lab_51275,Partial thromboplastin time,s,39.599998474121094,32.900001525878906,55.900001525878906,4.816062011563632,very sparse observed-at-onset coverage (4.82%); interpret cautiously
+1,lab_51275,Partial thromboplastin time,s,34.45000076293945,28.799999237060547,35.0,4.816062011563632,very sparse observed-at-onset coverage (4.82%); interpret cautiously

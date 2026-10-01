@@ -2,6 +2,14 @@
 
 Aggregate phenotyping outputs are available under `results/phenotyping/`.
 
+### First-onset clinical snapshot — current exploratory analysis
+
+The current preferred exploratory analysis includes 15,739 positive ICU stays and uses one 20-variable clinical snapshot at the first circulatory-failure onset. The best global geometric solution was PCA80 + k=2 (12 components, 80.55% cumulative variance, Silhouette 0.2249), yielding a multiorgan-dysfunction group (n=4,417) and a preserved/vasopressor-supported group (n=11,322).
+
+Exploratory subclustering of the multiorgan-dysfunction group produced hepatic/metabolic (n=1,416) and renal/hypotensive (n=3,001) patterns. Because within-group separation was modest (Silhouette 0.1034), these are reported as exploratory subphenotypes rather than discrete validated classes.
+
+Aggregate metrics, cluster sizes, clinical summaries, feature differences, observation coverage, and seed-stability results are provided under `results/phenotyping/onset_snapshot/`. Patient-level snapshots, timestamps, identifiers, scaled matrices, PCA objects, cluster assignments, and other fitted binary artifacts are not distributed.
+
 ### Temporal MiniRocket
 
 This analysis uses a temporal representation followed by MiniRocket embeddings, PCA, and K-means. Aggregate k-selection, cluster-level clinical summaries, feature summaries, rates, and run metrics are included in `results/phenotyping/temporal_minirocket/`.

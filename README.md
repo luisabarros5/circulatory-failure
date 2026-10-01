@@ -37,6 +37,12 @@ docs/         governance and reproducibility documentation
 
 The notebooks provide a concise scientific walkthrough. Detailed executable code is retained under `scripts/pipeline_steps/`.
 
+## Exploratory phenotyping
+
+The latest exploratory phenotyping analysis represents each positive ICU stay by a single clinical snapshot at the first circulatory-failure onset. A curated panel of 20 variables is median-imputed, selectively log-transformed, winsorized, standardized, reduced with PCA, and clustered with K-means. The best global geometric solution was PCA80 + k=2; a secondary within-cluster analysis yielded three clinically interpretable exploratory phenotypes.
+
+Implementation is available under `scripts/phenotyping/onset_snapshot/`. Only aggregate, non-patient-level outputs are published under `results/phenotyping/onset_snapshot/`.
+
 ## Main aggregate results
 
 On the MIMIC-IV internal test set, LightGBM achieved event/stay-level AUROC 0.9675 and AUPRC 0.9177.

@@ -1,0 +1,17 @@
+{
+  "best_silhouette": {
+    "variant": "PCA80",
+    "k": 2,
+    "score": 0.22491100430488586
+  },
+  "best_calinski_harabasz": {
+    "variant": "PCA80",
+    "k": 2,
+    "score": 2579.573974609375
+  },
+  "best_davies_bouldin": {
+    "variant": "PCA80",
+    "k": 4,
+    "score": 2.116114082978185
+  }
+}
