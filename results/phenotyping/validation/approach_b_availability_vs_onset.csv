@@ -1,5 +1,0 @@
-availability_measure,spearman_r_with_onset_hours,p_value
-source_rows_recounted,0.9999999999999998,0.0
-features_with_any_value,,
-features_with_any_real_observation,0.6795994387903879,0.0
-real_observed_fraction_flagged,-0.8036280302873949,0.0

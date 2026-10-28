@@ -23,7 +23,7 @@ data/         access instructions only
 figures/      aggregate figures only
 models/       artifact-governance instructions only
 notebooks/    four reader-facing workflow notebooks
-results/      aggregate model and exploratory phenotyping results
+results/      aggregate model results and internal phenotyping analyses
 scripts/      complete reviewed implementation
 docs/         governance and reproducibility documentation
 ```
@@ -37,11 +37,18 @@ docs/         governance and reproducibility documentation
 
 The notebooks provide a concise scientific walkthrough. Detailed executable code is retained under `scripts/pipeline_steps/`.
 
-## Exploratory phenotyping
+## Pre-onset clinical phenotyping
 
-The latest exploratory phenotyping analysis represents each positive ICU stay by a single clinical snapshot at the first circulatory-failure onset. A curated panel of 20 variables is median-imputed, selectively log-transformed, winsorized, standardized, reduced with PCA, and clustered with K-means. The best global geometric solution was PCA80 + k=2; a secondary within-cluster analysis yielded three clinically interpretable exploratory phenotypes.
+In a complementary analysis to the eight-hour **early prediction** task, we investigated clinical heterogeneity during the **two hours preceding the first corrected onset of circulatory failure** in MIMIC-IV. This analysis is retrospective characterization of patients who developed the endpoint, **not** an externally validated early-warning model.
 
-Implementation is available under `scripts/phenotyping/onset_snapshot/`. Only aggregate, non-patient-level outputs are published under `results/phenotyping/onset_snapshot/`.
+A prespecified panel of eight measurements—heart rate, mean arterial pressure, respiratory rate, SpO₂, lactate, platelet count, prothrombin time (PT), and activated partial thromboplastin time (PTT)—was summarized using the last directly observed value in that window. Laboratory features were selectively log-transformed; winsorization limits and robust scaling were fitted on the derivation subset. K-Means (k=2) was fitted on the derivation subset and evaluated using a frozen assignment rule in internal validation.
+
+The primary time-eligible cohort comprised **13,262 patients**; requiring all eight observed measurements retained **4,606 (34.7%)**, with **3,268** in derivation and **1,338** in internal validation. The two clusters showed moderately separated, stable clinical profiles and different observed outcomes. Their association with prognosis should not be interpreted as causal or as evidence of biologically distinct mechanisms.
+
+Additional audits found substantial **complete-case selection**, including overrepresentation of cardiovascular ICU patients, and **no consistent incremental discrimination** from cluster membership beyond its eight constituent variables in the evaluated prognostic models. **External validation of the phenotyping model has not been performed.** These limitations are part of the public results, not excluded from reporting.
+
+- Implementation and reproducibility notes: [`scripts/phenotyping/`](scripts/phenotyping/)
+- Aggregate phenotyping tables and audits: [`results/phenotyping/`](results/phenotyping/)
 
 ## Main aggregate results
 

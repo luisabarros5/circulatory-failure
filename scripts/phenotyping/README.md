@@ -1,48 +1,34 @@
-# Exploratory phenotyping
+# Pre-failure phenotyping — K-Means (MIMIC-IV)
 
-This directory contains the exploratory clustering pipeline for ICU stays meeting the current circulatory-failure definition (`cf_first_onset_primary`).
+This directory contains Lucas's pre-onset analysis, separate from the project's **early prediction** models. The nine Python scripts are located in [`preonset_kmeans/`](preonset_kmeans/).
 
-The phenotyping analysis is still under methodological review and should not be interpreted as a finalized phenotype solution.
+## Reproducible workflow
 
-## Current approach — first-onset clinical snapshot
+1. `01_build_corrected_preonset_cohort.py` — identifies the first corrected onset, constructs **strictly pre-onset** two-hour windows (24 five-minute time steps), selects one eligible ICU stay per patient, and writes intermediate files **locally**.
+2. `02_fit_frozen_k2.py` — requires at least one directly observed measurement of each of the eight variables (heart rate, MAP, respiratory rate, SpO₂, lactate, platelets, PT, and PTT); extracts the most recent observed value, applies transformations, winsorization, and scaling fitted on the derivation subset, and runs K-Means (k=2). Cluster assignments and the frozen model artifact are saved locally only.
+3. `03_primary_outcome_inference.py` — estimates risks and associations with outcomes.
+4. `04_clinical_enrichment.py` — derives comorbidities and vasoactive exposures using official SQL concepts and locally available authorized data sources.
+5. `05_confirmatory_inference.py` — performs covariate-balanced association analyses and evaluates incremental prognostic value.
+6. `06_make_publication_tables_figures.py` — creates aggregate publication tables and figures.
 
-The current preferred exploratory approach uses one clinical snapshot per positive ICU stay at the first circulatory-failure onset. It avoids temporal padding and does not use MiniRocket. A curated 20-variable panel is median-imputed, selectively log-transformed, winsorized, standardized, optionally reduced with PCA, and clustered with K-means.
+Helper modules: `common.py`, `inference_utils.py`, and `phenotype_inference_utils.py`.
 
-The complete pipeline and robustness analyses are under `onset_snapshot/`. The principal global solution is PCA80 + k=2, followed by exploratory subclustering of the multiorgan-dysfunction macrophenotype.
+The commands below assume you are running them **from the repository root**. Execution requires authorized access to MIMIC-IV data and a Python environment with the project's dependencies. No individual-level clinical data are distributed in this package.
 
-## Approach A — fixed 8-h pre-onset window
+```bash
+export SOURCE_ROOT=/path/to/authorized/inputs
+export WORK_DIR=/path/to/private/intermediates
+export MIMIC_ROOT=/path/to/mimiciv/3.1
+export MIMIC_CODE=/path/to/mimic-code
+python scripts/phenotyping/preonset_kmeans/01_build_corrected_preonset_cohort.py \
+  --clean-dir "$SOURCE_ROOT/icu_clean_v2" \
+  --labels-dir "$SOURCE_ROOT/step05_labels_v2" \
+  --stay-subject-map "$SOURCE_ROOT/stay_subject_map.parquet" \
+  --mimic-root "$MIMIC_ROOT" --out-dir "$WORK_DIR/cohort" --window-hours 2
+python scripts/phenotyping/preonset_kmeans/02_fit_frozen_k2.py \
+  --cohort-dir "$WORK_DIR/cohort" --out-dir "$WORK_DIR/model"
+```
 
-For each positive ICU stay:
+Run each script with `--help` to inspect the remaining steps; scripts 04 and 05 require additional clinical inputs and outputs from preceding steps. **Rerunning script 02 is not equivalent to externally validating the original frozen model.**
 
-1. identify the first circulatory-failure onset;
-2. extract up to 8 hours immediately before onset on a 5-minute grid;
-3. transform the temporal representation with MiniRocket;
-4. reduce the embedding with PCA (50 components);
-5. cluster with K-means.
-
-The initial k=3 solution used all 15,739 positive stays.
-
-A sensitivity analysis was also performed using only the 9,449 stays with a complete 8-hour history before onset.
-
-## Approach B — normalized pre-onset trajectory
-
-This approach uses the complete available trajectory from ICU history start to first failure onset.
-
-Each trajectory is mapped to a relative 0–100% time axis and resampled to 96 positions using a curated panel of 20 clinical variables.
-
-The resulting representation is processed with MiniRocket, PCA (50 components), and K-means.
-
-## Structure
-
-- `core/`: MiniRocket and clustering utilities
-- `cohort/`: positive-cohort construction and audits
-- `onset_snapshot/`: current first-onset snapshot pipeline, clinical characterization, subclustering, and stability analyses
-- `approach_a_fixed_8h/`: fixed-window approach
-- `approach_b_normalized_preonset/`: normalized-time approach
-- `validation/`: sensitivity and robustness analyses
-
-## Data availability
-
-Patient-level data, identifiers, temporal tensors, embeddings and cluster assignments are not distributed.
-
-Only code and aggregate results are included in the public repository.
+Public aggregate results: [`results/phenotyping/preonset_kmeans/`](../../../results/phenotyping/preonset_kmeans/). Do not publish `*.parquet` files, arrays, patient identifiers, patient hashes, internal logs, or binary models without a specific disclosure review.
