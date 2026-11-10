@@ -29,3 +29,21 @@ Only cohort-level aggregate results are included. All performance estimates belo
 Recall, F1, and precision were calculated using thresholds selected exclusively on the MIMIC-IV validation set and subsequently frozen for internal testing and external validation. No model retraining, scaler refitting, or threshold optimization was performed using NWICU or eICU data.
 
 The results are also available in machine-readable format in `event_metrics.csv`.
+
+## First-alert lead time — MIMIC-IV internal test
+
+This supplementary analysis compares the timing of the first alert at model-specific thresholds selected on the MIMIC-IV validation set to target 80% event recall. The thresholds were applied unchanged to the internal test set. The percentages below are the observed detection rates on that test set, not the validation target.
+
+| Model | Threshold | Events detected / eligible events | Detection rate | Mean lead time (h) | Median lead time (Q1–Q3), h |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| LightGBM | 0.242733 | 2,250 / 2,800 | 80.4% | 3.14 | 2.58 (1.08–4.67) |
+| Transformer | 0.299378 | 2,250 / 2,800 | 80.4% | 3.63 | 3.25 (1.67–5.33) |
+| FusionMLP | 0.571429 | 2,236 / 2,800 | 79.9% | 3.57 | 3.17 (1.58–5.33) |
+
+![Distribution of first-alert lead times for LightGBM, Transformer, and FusionMLP on the MIMIC-IV internal test set](../figures/figure_1B_overlay_recall_80.png)
+
+**Figure. First-alert lead time before circulatory failure.** Lead time is the interval from the first alert within the eight-hour prediction window to event onset. Each point is the percentage of all eligible events (2,800) whose first alert fell in that interval. Events without an alert contribute to the denominator but not to any interval. Vertical dotted lines indicate the mean lead time among detected events for each model. The figure labels FusionMLP as MLP.
+
+**LightGBM run.** This analysis uses the `full_primary` LightGBM run. The main performance tables use the `weighted_event_primary` run. The lead times above should not be interpreted as results for the weighted LightGBM model.
+
+[Download the aggregate lead-time results (CSV)](figure_1_lead_time_summary_recall_80.csv).
